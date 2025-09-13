@@ -5,6 +5,7 @@ class URLShortener {
         this.storageKey = 'urlShortenerData';
         this.useBackend = true; // Set to false for frontend-only mode
         this.disableQR = localStorage.getItem('urlShortenerDisableQR') === 'true';
+        this.isVercel = window.location.hostname.includes('vercel.app');
         this.init();
     }
 
@@ -128,7 +129,8 @@ class URLShortener {
         try {
             console.log('Attempting to shorten URL:', longUrl);
             
-            const response = await fetch('/api/shorten', {
+            const apiUrl = this.isVercel ? '/api/shorten' : '/api/shorten';
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -362,7 +364,8 @@ class URLShortener {
             
             if (this.useBackend) {
                 // Load from backend API
-                const response = await fetch('/api/urls');
+                const apiUrl = this.isVercel ? '/api/urls' : '/api/urls';
+                const response = await fetch(apiUrl);
                 const data = await response.json();
                 
                 if (data.success) {
@@ -499,12 +502,13 @@ class URLShortener {
         }
         
         try {
-            const response = await fetch('/api/health');
+            const apiUrl = this.isVercel ? '/api/health' : '/api/health';
+            const response = await fetch(apiUrl);
             if (!response.ok) {
                 throw new Error('Backend health check failed');
             }
             console.log('Backend is available');
-            modeStatus.textContent = 'Backend mode (server)';
+            modeStatus.textContent = this.isVercel ? 'Backend mode (Vercel)' : 'Backend mode (server)';
             modeToggle.style.display = 'inline-block';
             modeToggle.textContent = 'Switch to Frontend';
         } catch (error) {
