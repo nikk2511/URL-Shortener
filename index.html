@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-link"></i> URL Shortener</h1>
+            <p>Transform your long URLs into short, shareable links</p>
+            <div class="mode-indicator">
+                <span id="modeStatus">Checking backend...</span>
+                <button id="modeToggle" style="display: none; margin-left: 10px; padding: 5px 10px; font-size: 0.8rem;">Switch Mode</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- URL Shortening Form -->
+            <div class="form-container">
+                <form id="urlForm" class="url-form">
+                    <div class="input-group">
+                        <input 
+                            type="url" 
+                            id="longUrl" 
+                            placeholder="Enter your long URL here..." 
+                            required
+                            autocomplete="url"
+                        >
+                        <button type="submit" id="shortenBtn">
+                            <i class="fas fa-compress-alt"></i>
+                            Shorten URL
+                        </button>
+                    </div>
+                    <div id="errorMessage" class="error-message"></div>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <div class="result-card">
+                    <h3><i class="fas fa-check-circle"></i> URL Shortened Successfully!</h3>
+                    <div class="url-display">
+                        <div class="short-url-container">
+                            <input type="text" id="shortUrl" readonly>
+                            <button id="copyBtn" class="copy-btn">
+                                <i class="fas fa-copy"></i>
+                                Copy
+                            </button>
+                        </div>
+                        <div class="qr-section">
+                            <div id="qrCode"></div>
+                            <p>Scan QR Code</p>
+                            <button id="toggleQR" style="font-size: 0.8rem; padding: 5px 10px; margin-top: 5px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Disable QR</button>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <span id="clickCount">Clicks: 0</span>
+                        <span id="createdAt"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL History Section -->
+            <div class="history-section">
+                <h3><i class="fas fa-history"></i> Recent URLs</h3>
+                <div id="urlHistory" class="url-list">
+                    <p class="no-urls">No URLs shortened yet. Create your first short URL above!</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 URL Shortener. Built with ❤️</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="qr-generator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
