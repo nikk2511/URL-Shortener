@@ -192,7 +192,7 @@ Modify `styles.css` to customize:
 
 | Browser | Version | Support |
 |---------|---------|---------|
-| Chrome | 60+ | ✅ Full |
+| Chrome | 65+ | ✅ Full |
 | Firefox | 55+ | ✅ Full |
 | Safari | 12+ | ✅ Full |
 | Edge | 79+ | ✅ Full |
